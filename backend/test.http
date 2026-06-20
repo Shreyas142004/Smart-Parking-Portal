@@ -1,0 +1,14 @@
+POST http://localhost:5000/api/locations
+Content-Type: application/json
+
+{
+  "name": "Forum Fiza Mall",
+  "address": "Pandeshwar",
+  "city": "Mangalore",
+  "pricePerHour": {
+    "twoWheeler": 10,
+    "fourWheeler": 30
+  },
+  "totalSlots": 200,
+  "availableSlots": 180
+}
