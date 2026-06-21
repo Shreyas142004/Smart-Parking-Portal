@@ -11,6 +11,7 @@ export const createBooking = async (req, res) => {
       startTime,
       endTime,
       paymentMethod,
+      upiId,
       paymentStatus,
       transactionId,
     } = req.body;
@@ -76,6 +77,7 @@ export const createBooking = async (req, res) => {
       endTime,
       amount,
       paymentMethod,
+      upiId,
       paymentStatus,
       transactionId,
       
@@ -106,6 +108,7 @@ export const createBooking = async (req, res) => {
       endTime,
       amount,
       paymentMethod,
+      upiId,
       paymentStatus,
       transactionId,
     });
@@ -125,6 +128,13 @@ export const createBooking = async (req, res) => {
 
 export const getBookings = async (req, res) => {
   try {
+    await Booking.updateMany({
+      status: "confirmed",
+      endTime: { $lt: new Date() },
+    }, {
+      $set:{status:"completed"},
+    });
+
     const bookings = await Booking.find({
       user: req.user._id,
     })

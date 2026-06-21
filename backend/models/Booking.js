@@ -45,10 +45,10 @@ const bookingSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["pending", "confirmed", "cancelled"],
+      enum: ["pending", "confirmed","completed", "cancelled"],
       default: "confirmed",
     },
-    payementMethod:{
+    paymentMethod:{
       type:String,
       enum:["card","upi"],
       default:"card",
@@ -60,7 +60,10 @@ const bookingSchema = new mongoose.Schema(
     },
     transactionId:{
       type:String
-    }
+    },
+    upiId: {
+      type: String,
+    },
   },
   {
     timestamps: true,

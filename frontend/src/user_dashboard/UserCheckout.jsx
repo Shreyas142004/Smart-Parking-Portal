@@ -24,6 +24,7 @@ export default function UserCheckout() {
     navigate("/dashboard/slot");
   };
   const [paymentMethod, setPaymentMethod] = useState("card");
+  const [upiId, setUpiId] = useState("");
 
   const start = new Date(`${booking.date}T${booking.startTime}`);
   const end = new Date(`${booking.date}T${booking.endTime}`);
@@ -51,6 +52,7 @@ export default function UserCheckout() {
           endTime: `${booking.date}T${booking.endTime}`,
 
           paymentMethod,
+          upiId,
           paymentStatus: "pending",
           transactionId: `TXN$${Date.now()+Math.floor(Math.random() * 1000)}`,
         },
@@ -246,8 +248,17 @@ export default function UserCheckout() {
                   <label className="ml-1 font-medium text-slate-700 text-sm">
                     UPI ID
                   </label>
+                  {/* <input
+                    type="text"
+                    className="block bg-slate-50 p-3.5 border border-slate-200 focus:border-cyan-500 rounded-xl outline-none focus:ring-2 focus:ring-cyan-500/20 w-full text-slate-900 text-sm transition-all"
+                    placeholder="example@upi"
+                    required={paymentMethod === "upi"}
+                  /> */}
+
                   <input
                     type="text"
+                    value={upiId}
+                    onChange={(e)=> setUpiId(e.target.value)}
                     className="block bg-slate-50 p-3.5 border border-slate-200 focus:border-cyan-500 rounded-xl outline-none focus:ring-2 focus:ring-cyan-500/20 w-full text-slate-900 text-sm transition-all"
                     placeholder="example@upi"
                     required={paymentMethod === "upi"}
