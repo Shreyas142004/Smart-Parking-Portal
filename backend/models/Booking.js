@@ -45,24 +45,28 @@ const bookingSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["pending", "confirmed","completed", "cancelled"],
+      enum: ["pending", "confirmed", "completed", "cancelled", "archived"],
       default: "confirmed",
     },
-    paymentMethod:{
-      type:String,
-      enum:["card","upi"],
-      default:"card",
+    paymentMethod: {
+      type: String,
+      enum: ["card", "upi"],
+      default: "card",
     },
     paymentStatus: {
       type: String,
       enum: ["pending", "paid", "unpaid"],
-      default: "pending",
+      default: "paid",
     },
-    transactionId:{
-      type:String
+    transactionId: {
+      type: String,
     },
     upiId: {
       type: String,
+    },
+    archived: {
+      type: Boolean,
+      default: false,
     },
   },
   {

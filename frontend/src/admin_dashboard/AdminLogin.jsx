@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { ShieldAlert, Car, Lock, Mail, Eye, EyeOff } from 'lucide-react';
+import axios from 'axios';
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -9,16 +10,42 @@ export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
+    // e.preventDefault();
+    // // Mock login logic
+    // if (email === 'admin@parkzone.com' && password === 'admin123') {
+    //   toast.success('Admin login successful');
+    //   navigate('/admin/dashboard');
+    // } else {
+    //   toast.error('Invalid admin credentials');
+    // }
+
     e.preventDefault();
-    // Mock login logic
-    if (email === 'admin@parkzone.com' && password === 'admin123') {
-      toast.success('Admin login successful');
-      navigate('/admin/dashboard');
-    } else {
-      toast.error('Invalid admin credentials');
-    }
-  };
+      try {
+        const {data} =await axios.post("http://localhost:5000/api/auth/login",{
+          email,
+          password
+        })
+
+        // Verify admin role
+
+        if(data.user.role !== "admin"){
+          toast.error("Access Denied. Admin only.");
+          return
+        }
+
+        localStorage.setItem("token",data.token);
+        localStorage.setItem("user",JSON.stringify(data.user));
+        toast.success("Admin login successful");
+        navigate("/admin/dashboard");
+        
+      } catch (error) {
+        console.error(error);
+
+        toast.error(error.response?.data?.message || "Invaild credentials");
+        
+      }
+    };
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-linear-to-r from-[#e0e8ff] to-[#cff3fa] flex flex-col justify-center items-center p-4">

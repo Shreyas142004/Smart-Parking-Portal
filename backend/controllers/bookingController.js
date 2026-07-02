@@ -137,6 +137,7 @@ export const getBookings = async (req, res) => {
 
     const bookings = await Booking.find({
       user: req.user._id,
+      status: { $ne: "archived" },
     })
       .populate("location")
       .sort({ createdAt: -1 });
@@ -226,7 +227,11 @@ export const getOccupiedSlots = async (req, res) => {
 
 export const deleteBooking = async (req, res) => {
   try {
-    const booking = await Booking.findByIdAndDelete(req.params.id);
+    const booking = await Booking.findByIdAndUpdate(
+      req.params.id,
+      { status : "archived" },
+      { new: true }
+    );
 
     if (!booking) {
       return res.status(404).json({

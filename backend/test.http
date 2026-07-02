@@ -1,14 +1,2 @@
-POST http://localhost:5000/api/locations
-Content-Type: application/json
-
-{
-  "name": "Forum Fiza Mall",
-  "address": "Pandeshwar",
-  "city": "Mangalore",
-  "pricePerHour": {
-    "twoWheeler": 10,
-    "fourWheeler": 30
-  },
-  "totalSlots": 200,
-  "availableSlots": 180
-}
+GET http://localhost:5000/api/admin/revenue
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMzc4NGJkYzkwOWQwNWNhNDg5ZDI4MiIsImlhdCI6MTc4MjkyNjI4OCwiZXhwIjoxNzgzMDEyNjg4fQ.zXWi37MzwArpE1oSS7gROzmekbSnwJVdHFuhmxiCzLw

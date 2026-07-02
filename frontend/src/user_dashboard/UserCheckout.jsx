@@ -53,7 +53,7 @@ export default function UserCheckout() {
 
           paymentMethod,
           upiId,
-          paymentStatus: "pending",
+          paymentStatus: "paid",
           transactionId: `TXN$${Date.now()+Math.floor(Math.random() * 1000)}`,
         },
         {

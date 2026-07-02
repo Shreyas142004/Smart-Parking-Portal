@@ -144,9 +144,9 @@ export default function UserBookings() {
                       ? "Active"
                       : booking.status === "completed"
                         ? "Completed"
-                      : booking.status === "cancelled"
-                        ? "Cancelled"
-                        : booking.status}
+                        : booking.status === "cancelled"
+                          ? "Cancelled"
+                          : booking.status}
                   </span>
                   <p className="text-sm font-semibold text-purple-600">
                     OTP: {booking.otp}
@@ -214,7 +214,8 @@ export default function UserBookings() {
                   </p>
                 </div>
 
-                {booking.status === "confirmed" && (
+                {(booking.status === "confirmed" ||
+                  booking.status === "cancelled") && (
                   <button
                     onClick={() => {
                       toast((t) => (
@@ -252,7 +253,7 @@ export default function UserBookings() {
                   onClick={() => handleDelete(booking._id)}
                   className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-xl transition-colors"
                 >
-                  Delete
+                  Remove
                 </button>
               </div>
             </div>
