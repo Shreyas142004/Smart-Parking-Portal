@@ -4,11 +4,8 @@ import { protect } from "../middleware/authMiddleware.js";
 export const getAllBookings = async (req, res) => {
   try {
     const bookings = await Booking.find({
-        // archived:false,
-        $or: [
-    { archived: false },
-    { archived: { $exists: false } }
-  ]
+      // archived:false,
+      $or: [{ archived: false }, { archived: { $exists: false } }],
     })
       .populate("user", "name email")
       .populate("location", "name city")
@@ -25,7 +22,7 @@ export const archiveBooking = async (req, res) => {
     const booking = await Booking.findByIdAndUpdate(
       req.params.id,
       { archived: true },
-      { new: true }
+      { new: true },
     );
 
     if (!booking) {
@@ -38,10 +35,15 @@ export const archiveBooking = async (req, res) => {
       message: "Booking archived successfully",
       booking,
     });
-
   } catch (error) {
     res.status(500).json({
       message: error.message,
     });
   }
+};
+
+export const getArchivedBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find({ archived: true })
+  } catch (error) {}
 };

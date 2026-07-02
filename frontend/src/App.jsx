@@ -26,7 +26,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         
-        <Route path="/dashboard" element={<UserLayout />}>
+        <Route path="/dashboard" element={<Login><UserLayout /></Login>}>
           <Route path="location" element={<UserLocationSelect />} />
           <Route path="bookings" element={<UserBookings />} />
           <Route path="vehicle" element={<UserVehicleSelect />} />
@@ -39,7 +39,8 @@ function App() {
         <Route path="/admin" element={<AdminLogin />} />
         
         {/* Admin Dashboard Pages Wrapped in Layout */}
-        <Route element={<AdminLayout />}>
+        
+        <Route element={<AdminLogin><AdminLayout /></AdminLogin>}>
           <Route path="/admin/dashboard" element={<AdminOverview />} />
           <Route path="/admin/bookings" element={<AdminBookings />} />
           <Route path="/admin/users" element={<AdminUsers />} />
